@@ -24,10 +24,16 @@ public class MyUser {
     private String name;
 
     @Column
+    @ToString.Exclude
     private String password;
 
-    @OneToMany(mappedBy = "myUser",
+    @OneToMany(mappedBy = "userId",
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY)
-    private List<MyMessage> messages;
+    @ToString.Exclude
+    private List<MyMessage> myMessages;
+
+    public void addMessage(MyMessage message) {
+        this.myMessages.add(message);
+    }
 }

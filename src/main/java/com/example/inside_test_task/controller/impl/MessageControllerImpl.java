@@ -21,6 +21,6 @@ public class MessageControllerImpl implements MessageController {
 
     @Override
     public ResponseEntity<?> getMessageFromClient(MessageRequest request) {
-        return ResponseEntity.ok(messageService.getMessageFromClient(request));
+        return ResponseEntity.ok(messageService.getMessageFromClient(request.getName(), request.getMessage()));
     }
 }

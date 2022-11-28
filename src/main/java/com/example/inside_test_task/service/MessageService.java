@@ -1,9 +1,7 @@
 package com.example.inside_test_task.service;
 
-import com.example.inside_test_task.dto.in.MessageRequest;
+import org.springframework.http.ResponseEntity;
 
 public interface MessageService {
-
-
-    Object getMessageFromClient(MessageRequest request);
+    ResponseEntity<?> getMessageFromClient(String username, String message);
 }

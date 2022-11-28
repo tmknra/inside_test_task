@@ -19,11 +19,15 @@ public class MyMessage {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "my_user_name", nullable = false)
-    private MyUser myUser;
+    @JoinColumn(name = "userId", nullable = false)
+    @ToString.Exclude
+    private MyUser userId;
 
     @Column
     private String message;
 
-
+    public MyMessage(MyUser name, String message) {
+        this.userId = name;
+        this.message = message;
+    }
 }
