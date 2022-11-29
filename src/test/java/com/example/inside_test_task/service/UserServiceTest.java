@@ -1,20 +1,22 @@
 package com.example.inside_test_task.service;
 
 import com.auth0.jwt.JWT;
-import com.example.inside_test_task.InsideTestTaskApplicationTests;
+import com.example.inside_test_task.InsideTestTaskAppTests;
 import com.example.inside_test_task.dto.in.JWTRequest;
 import com.example.inside_test_task.exception.InvalidPasswordException;
 import com.example.inside_test_task.exception.UserNotFoundException;
+import liquibase.resource.Resource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class UserServiceTest extends InsideTestTaskApplicationTests {
+public class UserServiceTest extends InsideTestTaskAppTests {
     @Autowired
     private UserService userService;
 

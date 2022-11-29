@@ -2,12 +2,10 @@ package com.example.inside_test_task.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.inside_test_task.InsideTestTaskApplicationTests;
+import com.example.inside_test_task.InsideTestTaskAppTests;
 import com.example.inside_test_task.dto.in.MessageRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
-class MessageControllerTest extends InsideTestTaskApplicationTests {
+class MessageControllerTest extends InsideTestTaskAppTests {
     @Autowired
     private MockMvc mockMvc;
     @Autowired

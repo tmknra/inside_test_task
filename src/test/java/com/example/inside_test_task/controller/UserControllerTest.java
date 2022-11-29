@@ -1,15 +1,13 @@
 package com.example.inside_test_task.controller;
 
-import com.auth0.jwt.JWT;
-import com.example.inside_test_task.InsideTestTaskApplicationTests;
+import com.example.inside_test_task.InsideTestTaskAppTests;
 import com.example.inside_test_task.dto.in.JWTRequest;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -17,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
-public class UserControllerTest extends InsideTestTaskApplicationTests {
+public class UserControllerTest extends InsideTestTaskAppTests {
     @Autowired
     private MockMvc mockMvc;
     @Autowired

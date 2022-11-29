@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.example.inside_test_task.repository")
-public class InsideTestTaskApplication {
+public class InsideTestTaskApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(InsideTestTaskApplication.class, args);
+        SpringApplication.run(InsideTestTaskApp.class, args);
     }
 
 }

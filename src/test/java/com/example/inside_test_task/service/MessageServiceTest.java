@@ -2,14 +2,13 @@ package com.example.inside_test_task.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.inside_test_task.InsideTestTaskApplicationTests;
+import com.example.inside_test_task.InsideTestTaskAppTests;
 import com.example.inside_test_task.dto.in.MessageRequest;
 import com.example.inside_test_task.exception.InvalidTokenException;
 import com.example.inside_test_task.exception.UserNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class MessageServiceTest extends InsideTestTaskApplicationTests {
+public class MessageServiceTest extends InsideTestTaskAppTests {
     @Autowired
     private MessageService messageService;
 
@@ -43,7 +42,8 @@ public class MessageServiceTest extends InsideTestTaskApplicationTests {
 
         HashMap<String, Object> messageFromClient2 =
                 messageService.getMessageFromClient(message2.getName(), message2.getMessage(), "Bearer_" + token2);
-        assertEquals(3, ((ArrayList<String>) messageFromClient2.get("message")).size());
+        assertEquals(ArrayList.class, messageFromClient2.get("message").getClass());
+
 
         assertThrows(InvalidTokenException.class, () -> messageService.getMessageFromClient(
                 message1.getName(), message1.getMessage(),"Bearer_" + invalidToken));
