@@ -1,7 +1,10 @@
 package com.example.inside_test_task.service;
 
-import org.springframework.http.ResponseEntity;
+import com.example.inside_test_task.exception.InvalidTokenException;
+import com.example.inside_test_task.exception.UserNotFoundException;
+
+import java.util.HashMap;
 
 public interface MessageService {
-    ResponseEntity<?> getMessageFromClient(String username, String message);
+    HashMap<String, Object> getMessageFromClient(String username, String message, String header) throws UserNotFoundException, InvalidTokenException;
 }

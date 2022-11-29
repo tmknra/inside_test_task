@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<MyMessage, Long> {
 
-    // @Query(value = "SELECT * FROM messages ORDER BY id DESC LIMIT :amount", nativeQuery = true)
-    @Query("select m.id as id, m.userId.name as name, m.message as message from MyMessage m order by m.id desc limit :amount")
+    @Query("select m.id as id, m.userId.name as name, m.message as message " +
+            "from MyMessage m order by m.id desc limit :amount")
     List<LastMessages> findLastMessages(String amount);
 }
