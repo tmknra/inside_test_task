@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: 'postgres:14-alpine'
+    container_name: my_test_db
+    ports:
+      - "5434:5432"
+    env_file: .env
+    restart: always
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: InsideTestTaskApp
+    depends_on:
+      - db
+    ports:
+      - "9000:9000"
+    networks:
+      - default
+    env_file: .env
