@@ -1,0 +1,26 @@
+1) Запрос для получения JWT токена
+
+  а) корректный:
+curl --location --request POST http://localhost:9000/login --header "Content-Type: application/json" --data-raw "{\"name\":\"test1\",\"password\":\"123456\"}"
+
+  б) с некорректным паролем:
+curl --location --request POST http://localhost:9000/login --header "Content-Type: application/json" --data-raw "{\"name\":\"test1\",\"password\":\"qwerty\"}"
+
+  в) несуществующий пользователь:
+curl --location --request POST http://localhost:9000/login --header "Content-Type: application/json" --data-raw "{\"name\":\"harry potter\",\"password\":\"qwerty\"}"
+
+
+2) Запрос с отправкой сообщения на сервер.
+  *Перед отправкой запроса необходимо вставить свежий токен, полученный из запроса выше.
+
+  а) корректный c обычным сообщением:
+curl --location --request POST localhost:9000/messages/send --header "Authorization: Bearer_*здесь_должен_быть_токен*" --header "Content-Type: application/json" --data-raw "{\"name\":\"test1\",\"message\":\"hello\"}""
+
+  б) корректный с запросом истории сообщений:
+curl --location --request POST localhost:9000/messages/send --header "Authorization: Bearer_*здесь_должен_быть_токен*" --header "Content-Type: application/json" --data-raw "{\"name\":\"test1\",\"message\":\"history 5\"}""
+
+  в) сообщение от несуществующего пользователя:
+curl --location --request POST localhost:9000/messages/send --header "Authorization: Bearer_*здесь_должен_быть_токен*" --header "Content-Type: application/json" --data-raw "{\"name\":\"notExistingUser\",\"message\":\"hello\"}""
+
+  г) сообщения от пользователя с некорретным токеном:
+curl --location --request POST localhost:9000/messages/send --header "Authorization: Bearer_*здесь можно ничего не менять*" --header "Content-Type: application/json" --data-raw "{\"name\":\"test1\",\"message\":\"hello\"}""
