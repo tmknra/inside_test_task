@@ -22,7 +22,9 @@ public class MessageControllerImpl implements MessageController {
 
 
     @Override
-    public ResponseEntity<?> getMessageFromClient(MessageRequest request, String header) throws UserNotFoundException, InvalidTokenException {
+    public ResponseEntity<?> getMessageFromClient(MessageRequest request, String header)
+            throws UserNotFoundException, InvalidTokenException {
         return ResponseEntity.ok(messageService.getMessageFromClient(request.getName(), request.getMessage(), header));
     }
+
 }

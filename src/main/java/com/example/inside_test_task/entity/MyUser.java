@@ -33,7 +33,4 @@ public class MyUser {
     @ToString.Exclude
     private List<MyMessage> myMessages;
 
-    public void addMessage(MyMessage message) {
-        this.myMessages.add(message);
-    }
 }

@@ -20,7 +20,9 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public ResponseEntity<?> getJwtFromNameAndPassword(JWTRequest request) throws UserNotFoundException, InvalidPasswordException {
+    public ResponseEntity<?> getJwtFromNameAndPassword(JWTRequest request)
+            throws UserNotFoundException, InvalidPasswordException {
         return ResponseEntity.ok(userService.getJwtFromNameAndPassword(request));
     }
+
 }
