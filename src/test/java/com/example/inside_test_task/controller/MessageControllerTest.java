@@ -23,6 +23,10 @@ class MessageControllerTest extends InsideTestTaskAppTests {
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     Для тестов контроллера используется библиотека Mockito.
+     Проверяются как базовые случаи, так и случаи с получением некорректной информации.
+     */
     @Test
     void getMessageFromClient() throws Exception {
         MessageRequest test1 = MessageRequest.builder()
@@ -49,6 +53,9 @@ class MessageControllerTest extends InsideTestTaskAppTests {
         String json2 = objectMapper.writeValueAsString(test2);
         String json3 = objectMapper.writeValueAsString(notExistingUser);
 
+        /**
+         Базовый случай отправки сообщения
+         */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+token1)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -58,6 +65,9 @@ class MessageControllerTest extends InsideTestTaskAppTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.message").value("Message successfully added to database."));
 
+        /**
+         Случай с запросом истории сообщений. На выходе проверяем, что полученный результат является массивом данных.
+         */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+token2)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -67,6 +77,9 @@ class MessageControllerTest extends InsideTestTaskAppTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.message").isArray());
 
+        /**
+         Отправка сообщения несуществующим пользователем.
+         */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+token3)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -75,6 +88,9 @@ class MessageControllerTest extends InsideTestTaskAppTests {
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.message").value("Provided user not found"));
 
+        /**
+         Отправка сообщения с некорректным JWT токеном.
+         */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+invalidToken)
                         .contentType(MediaType.APPLICATION_JSON)

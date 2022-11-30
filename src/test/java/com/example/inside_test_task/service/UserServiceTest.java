@@ -17,18 +17,27 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserServiceTest extends InsideTestTaskAppTests {
     @Autowired
     private UserService userService;
-
+    /**
+     Для тестов сервиса используется библиотека JUnit.
+     Проверяются как базовые случаи, так и случаи с получением некорректной информации.
+     */
     @Test
     void getJwtFromNameAndPassword() throws UserNotFoundException, InvalidPasswordException {
         JWTRequest test = JWTRequest.builder().name("test").password("123456").build();
+        /**
+         Базовый случай. Имя и пароль верны.
+         */
         HashMap<String, String> map = userService.getJwtFromNameAndPassword(test);
-
         assertTrue(map.containsKey("token"));
         assertEquals("test", JWT.decode(map.get("token")).getSubject());
-
+        /**
+         Случай с некорректным именем юзера. Проверяем выбрасывается ли исключение.
+         */
         JWTRequest notExistingUser = JWTRequest.builder().name("Dustin Hoffman").password("123456").build();
         assertThrows(UserNotFoundException.class, () -> userService.getJwtFromNameAndPassword(notExistingUser));
-
+        /**
+         Случай с некорректным паролем. Проверяем выбрасывается ли исключение.
+         */
         JWTRequest wrongPassword = JWTRequest.builder().name("test").password("1234561").build();
         assertThrows(InvalidPasswordException.class, () -> userService.getJwtFromNameAndPassword(wrongPassword));
     }

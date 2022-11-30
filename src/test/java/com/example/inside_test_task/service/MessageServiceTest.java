@@ -20,7 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MessageServiceTest extends InsideTestTaskAppTests {
     @Autowired
     private MessageService messageService;
-
+    /**
+     Для тестов сервиса используется библиотека JUnit.
+     Проверяются как базовые случаи, так и случаи с получением некорректной информации.
+     */
     @Test
     void getMessageFromClient() throws UserNotFoundException, InvalidTokenException {
         MessageRequest message1 = MessageRequest.builder().name("test").message("hello").build();
@@ -35,19 +38,28 @@ public class MessageServiceTest extends InsideTestTaskAppTests {
         String token3 = JWT.create().withSubject(notExistingUser.getName()).sign(Algorithm.HMAC256("secret".getBytes()));
 
 
+        /**
+         Базовый случай
+         */
         HashMap<String, Object> messageFromClient1 =
                 messageService.getMessageFromClient(message1.getName(), message1.getMessage(), "Bearer_" + token1);
 
         assertEquals("Message successfully added to database.", messageFromClient1.get("message"));
-
+        /**
+         Случай с запросом истории сообщений
+         */
         HashMap<String, Object> messageFromClient2 =
                 messageService.getMessageFromClient(message2.getName(), message2.getMessage(), "Bearer_" + token2);
         assertEquals(ArrayList.class, messageFromClient2.get("message").getClass());
 
-
+        /**
+         Случай с некорректным токеном. Проверяем выбрасывается ли исключение.
+         */
         assertThrows(InvalidTokenException.class, () -> messageService.getMessageFromClient(
                 message1.getName(), message1.getMessage(),"Bearer_" + invalidToken));
-
+        /**
+         Случай с некорректным именем юзера. Проверяем выбрасывается ли исключение.
+         */
         assertThrows(UserNotFoundException.class, () -> messageService.getMessageFromClient(
                 notExistingUser.getName(), notExistingUser.getMessage(),"Bearer_" + token3));
     }
