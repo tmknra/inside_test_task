@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: roman.tumaikin
+      changes:
+        - sqlFile:
+            path: db/changelog/change_sets/create_users.sql
+  - changeSet:
+      id: 2
+      author: roman.tumaikin
+      changes:
+        - sqlFile:
+            path: db/changelog/change_sets/create_messages_table.sql
