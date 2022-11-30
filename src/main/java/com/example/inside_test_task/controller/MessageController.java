@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/messages")
 public interface MessageController {
+
+    /**
+     Эндпоинт для обработки сообщений, полученных от клиента
+     */
     @PostMapping("/send")
     ResponseEntity<?> getMessageFromClient(@RequestBody MessageRequest request,
                                            @RequestHeader(HttpHeaders.AUTHORIZATION) String header)

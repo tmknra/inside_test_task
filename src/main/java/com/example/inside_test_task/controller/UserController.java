@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public interface UserController {
+    /**
+      Эндпоинт для генерации JWT токена
+     */
     @PostMapping("/login")
     ResponseEntity<?> getJwtFromNameAndPassword(@RequestBody JWTRequest request)
             throws UserNotFoundException, InvalidPasswordException;

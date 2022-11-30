@@ -12,12 +12,17 @@ import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {
+    /**
+     Обработка основных исключений, получаемых в процессе работы с приложением. При возникновении ошибки
+     фронту пробрасывается сообщение с текстом ошибки.
+     */
     @ExceptionHandler(value
             = {InvalidPasswordException.class, UserNotFoundException.class, InvalidTokenException.class,
             JWTDecodeException.class})
     protected ResponseEntity<Object> handleConflict(Exception ex){
         HashMap<String, String> map = new HashMap<>();
         map.put("message", ex.getMessage());
+
         if (ex.getClass()==InvalidPasswordException.class || ex.getClass() == InvalidTokenException.class ||
                 ex.getClass() == JWTDecodeException.class){
             return ResponseEntity.status(UNAUTHORIZED).body(map);
