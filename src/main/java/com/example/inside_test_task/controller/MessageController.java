@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface MessageController {
 
     /**
-     Эндпоинт для обработки сообщений, полученных от клиента
+     * Эндпоинт для обработки сообщений, полученных от клиента
      */
     @PostMapping("/send")
     ResponseEntity<?> getMessageFromClient(@RequestBody MessageRequest request,

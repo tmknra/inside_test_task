@@ -21,8 +21,8 @@ public class UserControllerTest extends InsideTestTaskAppTests {
     private ObjectMapper objectMapper;
 
     /**
-     Для тестов контроллера используется библиотека Mockito.
-     Проверяются как базовые случаи, так и случаи с получением некорректной информации.
+     * Для тестов контроллера используется библиотека Mockito.
+     * Проверяются как базовые случаи, так и случаи с получением некорректной информации.
      */
     @Test
     void getJwtFromNameAndPassword() throws Exception {
@@ -39,8 +39,8 @@ public class UserControllerTest extends InsideTestTaskAppTests {
         String invalidPassJson = objectMapper.writeValueAsString(invalidPassword);
         String notExistingUserJson = objectMapper.writeValueAsString(notExistingUser);
         /**
-         Базовый случай. Пароль корректен, юзер существует.
-        */
+         * Базовый случай. Пароль корректен, юзер существует.
+         */
         this.mockMvc.perform(post("/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
@@ -49,7 +49,7 @@ public class UserControllerTest extends InsideTestTaskAppTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.token").isNotEmpty());
         /**
-         Случай с некорректно введенным паролем.
+         * Случай с некорректно введенным паролем.
          */
         this.mockMvc.perform(post("/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ public class UserControllerTest extends InsideTestTaskAppTests {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.message").value("Invalid password"));
         /**
-         Случай с неверным именем юзера.
+         * Случай с неверным именем юзера.
          */
         this.mockMvc.perform(post("/login")
                         .contentType(MediaType.APPLICATION_JSON)

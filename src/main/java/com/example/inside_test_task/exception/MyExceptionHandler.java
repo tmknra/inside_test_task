@@ -13,8 +13,8 @@ import static org.springframework.http.HttpStatus.*;
 @ControllerAdvice
 public class MyExceptionHandler extends ResponseEntityExceptionHandler {
     /**
-     Обработка основных исключений, получаемых в процессе работы с приложением. При возникновении ошибки
-     фронту пробрасывается сообщение с текстом ошибки.
+     * Обработка основных исключений, получаемых в процессе работы с приложением. При возникновении ошибки
+     * фронту пробрасывается сообщение с текстом ошибки.
      */
     @ExceptionHandler(value
             = {InvalidPasswordException.class, UserNotFoundException.class, InvalidTokenException.class,

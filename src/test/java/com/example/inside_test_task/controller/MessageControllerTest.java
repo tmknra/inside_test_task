@@ -24,8 +24,8 @@ class MessageControllerTest extends InsideTestTaskAppTests {
     private ObjectMapper objectMapper;
 
     /**
-     Для тестов контроллера используется библиотека Mockito.
-     Проверяются как базовые случаи, так и случаи с получением некорректной информации.
+     * Для тестов контроллера используется библиотека Mockito.
+     * Проверяются как базовые случаи, так и случаи с получением некорректной информации.
      */
     @Test
     void getMessageFromClient() throws Exception {
@@ -54,7 +54,7 @@ class MessageControllerTest extends InsideTestTaskAppTests {
         String json3 = objectMapper.writeValueAsString(notExistingUser);
 
         /**
-         Базовый случай отправки сообщения
+         * Базовый случай отправки сообщения
          */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+token1)
@@ -66,7 +66,7 @@ class MessageControllerTest extends InsideTestTaskAppTests {
                 .andExpect(jsonPath("$.message").value("Message successfully added to database."));
 
         /**
-         Случай с запросом истории сообщений. На выходе проверяем, что полученный результат является массивом данных.
+         * Случай с запросом истории сообщений. На выходе проверяем, что полученный результат является массивом данных.
          */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+token2)
@@ -78,7 +78,7 @@ class MessageControllerTest extends InsideTestTaskAppTests {
                 .andExpect(jsonPath("$.message").isArray());
 
         /**
-         Отправка сообщения несуществующим пользователем.
+         * Отправка сообщения несуществующим пользователем.
          */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+token3)
@@ -89,7 +89,7 @@ class MessageControllerTest extends InsideTestTaskAppTests {
                 .andExpect(jsonPath("$.message").value("Provided user not found"));
 
         /**
-         Отправка сообщения с некорректным JWT токеном.
+         * Отправка сообщения с некорректным JWT токеном.
          */
         this.mockMvc.perform(post("/messages/send")
                         .header(HttpHeaders.AUTHORIZATION, "Bearer_"+invalidToken)
